@@ -20,6 +20,7 @@ description="Enter your credentails to access your account."
 <script lang="ts" setup>
 import * as z from 'zod';
 import type { FormSubmitEvent, AuthFormField } from '@nuxt/ui'
+import type { User } from '~/repositories/auth/auth';
 const fields: Array<AuthFormField>=[{
     name:'email',
     type:"email", 
@@ -35,17 +36,17 @@ const fields: Array<AuthFormField>=[{
     required: true 
 }
    ];
-
+  const {$auth} = useNuxtApp();
    const schema = z.object(
     {
     email:z.email("Invalid email"),
     password: z.string("Password is required").min(8,"Must be at least 8 characters")
    });
+   
 
-   type Schema = z.output<typeof schema>;
-
-   function onSubmit(payload: FormSubmitEvent<Schema>){
-    console.log(payload,"submitted");
-   }
+   async function onSubmit(payload: FormSubmitEvent<User>){
+    const response = await $auth.login(payload.data);
+    console.log(response);   
+}
 
 </script>
