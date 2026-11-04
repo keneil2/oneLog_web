@@ -1,6 +1,8 @@
+<script lang="ts" setup>
+import "~/assets/main.css"
+</script>
 <template>
-  <div>
-    <NuxtRouteAnnouncer />
-    <NuxtWelcome />
-  </div>
+  <UApp :toaster="{ position: 'top-right' }">
+    <NuxtPage />
+  </UApp>
 </template>
