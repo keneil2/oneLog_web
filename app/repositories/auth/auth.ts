@@ -7,11 +7,36 @@ export interface User {
   password_confirmation?: string;
 }
 
- export const createAuthRepository = (fetch: $Fetch) => {
+export const createAuthRepository = (fetch: $Fetch) => {
+  const setCSRFToken = async () => await fetch("/sanctum/csrf-cookie");
+
   return {
-    register: (user: User) =>
-      fetch("/register", { method: "POST", body: user }),
-    login: (user:User) => 
-        fetch("/login", { method: "POST", body: user }),
+
+    
+    register: async (user: User) =>
+      await setCSRFToken().then(() =>
+        fetch("/api/register", { method: "POST", body: user }),
+      ),
+      
+    
+    login: async (user: User) => {
+      const {push,currentRoute}=useRouter();
+      await setCSRFToken().then(async () => {
+       await fetch("/api/login", { method: "POST", body: user });
+         const redirect  = currentRoute.value.query.redirect;
+        
+         push(redirect as string | undefined ?? "dashboard");
+      });
+    },
+    logout:()=>{
+    const {push}=useRouter();
+      fetch("/api/logout").then(()=>{
+        push("/login")
+      });
+      
+    },
+    
+    login_test:() => fetch("/api/auth-test"),
+    authVerification: (url: string) => fetch(url),
   };
 };
