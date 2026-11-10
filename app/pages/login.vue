@@ -44,7 +44,7 @@
           <template #trailing>
             <button
               type="button"
-              class="flex size-[38px] items-center justify-center rounded-lg text-muted hover:text-highlighted"
+              class="flex size-[38px] items-center justify-center rounded-[5px] text-muted hover:text-highlighted"
               :aria-label="showPassword ? 'Hide password' : 'Show password'"
               :aria-pressed="showPassword"
               @click="showPassword = !showPassword"
@@ -62,7 +62,7 @@
         loading-auto
         trailing-icon="i-lucide-arrow-right"
         label="Sign in"
-        class="mt-1 h-11 rounded-[9px] text-sm font-semibold shadow-lg shadow-primary/20 active:translate-y-px"
+        class="mt-1 h-11 rounded-[5px] text-sm font-semibold shadow-lg shadow-primary/20 active:translate-y-px"
       />
     </UForm>
   </AuthLayout>

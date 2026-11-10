@@ -44,7 +44,7 @@
           <template #trailing>
             <button
               type="button"
-              class="flex size-[38px] items-center justify-center rounded-lg text-muted hover:text-highlighted"
+              class="flex size-[38px] items-center justify-center rounded-[5px] text-muted hover:text-highlighted"
               :aria-label="showPassword ? 'Hide passwords' : 'Show passwords'"
               :aria-pressed="showPassword"
               @click="showPassword = !showPassword"
@@ -78,7 +78,7 @@
         loading-auto
         trailing-icon="i-lucide-arrow-right"
         label="Create account"
-        class="mt-1 h-11 rounded-[9px] text-sm font-semibold shadow-lg shadow-primary/20 active:translate-y-px"
+        class="mt-1 h-11 rounded-[5px] text-sm font-semibold shadow-lg shadow-primary/20 active:translate-y-px"
       />
 
       <p class="text-center text-[12.5px] leading-normal text-muted">
@@ -114,8 +114,8 @@ const state = reactive<Partial<User>>({
 });
 
 const showPassword = ref(false);
-
+const {push} = useRouter();
 async function onSubmit(payload: FormSubmitEvent<User>) {
-  await $auth.register(payload.data);
+  await $auth.register(payload.data).then(()=>push("/email-sent?email="+encodeURIComponent(payload.data.email)));
 }
 </script>

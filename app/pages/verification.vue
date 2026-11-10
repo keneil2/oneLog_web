@@ -106,7 +106,7 @@ const messages: Record<LinkStatus, StatusMessage> = {
   },
 };
 
-const buttonClass = "h-11 justify-between rounded-[9px] text-sm font-semibold shadow-lg shadow-primary/20 active:translate-y-px";
+const buttonClass = "h-11 justify-between rounded-[5px] text-sm font-semibold shadow-lg shadow-primary/20 active:translate-y-px";
 
 const { $auth } = useNuxtApp();
 const route = useRoute();

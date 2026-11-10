@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col gap-5">
     <div
-      class="flex size-10 items-center justify-center rounded-[10px] border"
+      class="flex size-10 items-center justify-center rounded-[5px] border"
       :class="tones[tone].badge"
     >
       <UIcon v-if="icon" :name="icon" class="size-5" />
@@ -12,12 +12,14 @@
       <h1 class="text-[34px] leading-[1.1] font-semibold tracking-[-0.035em]">
         {{ title }}
       </h1>
-      <p class="text-[15px] text-muted">{{ description }}</p>
+      <p class="text-[15px] text-muted">
+        <slot name="description">{{ description }}</slot>
+      </p>
     </header>
 
-    <div class="flex items-center gap-2.5 rounded-[9px] border border-default bg-neutral-950 px-3 py-2.5 font-mono text-xs">
+    <div class="flex items-center gap-2.5 rounded-[5px] border border-default bg-neutral-950 px-3 py-2.5 font-mono text-xs">
       <span
-        class="rounded px-1.5 py-0.5 text-[10px] leading-none font-bold"
+        class="rounded-[5px] px-1.5 py-0.5 text-[10px] leading-none font-bold"
         :class="tones[tone].tag"
       >
         {{ logTag }}
@@ -34,7 +36,7 @@ defineProps<{
   icon?: string;
   tone: "neutral" | "primary" | "warning" | "error";
   title: string;
-  description: string;
+  description?: string;
   logTag: string;
   logText: string;
 }>();
