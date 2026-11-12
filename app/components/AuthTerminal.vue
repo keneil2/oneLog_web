@@ -28,11 +28,11 @@ const wall = Array.from({ length: 32 }, (_, i) =>
 
     <div class="relative w-full max-w-[580px]">
       <!-- Two cards peeking out behind the window -->
-      <div class="absolute inset-x-[7%] -top-[22px] h-20 rounded-xl border border-default bg-neutral-950" />
-      <div class="absolute inset-x-[3.5%] -top-[11px] h-20 rounded-[13px] border border-default bg-neutral-900" />
+      <div class="absolute inset-x-[7%] -top-[22px] h-20 rounded-[5px] border border-default bg-neutral-950" />
+      <div class="absolute inset-x-[3.5%] -top-[11px] h-20 rounded-[5px] border border-default bg-neutral-900" />
 
       <!-- Terminal window -->
-      <div class="mono relative overflow-hidden rounded-[14px] border border-default bg-linear-to-b from-neutral-900 to-neutral-950 shadow-2xl shadow-black/60">
+      <div class="mono relative overflow-hidden rounded-[5px] border border-default bg-linear-to-b from-neutral-900 to-neutral-950 shadow-2xl shadow-black/60">
         <div class="absolute inset-x-[12%] top-0 h-px bg-linear-to-r from-transparent via-primary/75 to-transparent" />
 
         <!-- Title bar -->
@@ -40,7 +40,7 @@ const wall = Array.from({ length: 32 }, (_, i) =>
           <span class="whitespace-nowrap text-toned">
             <span class="mr-2 text-dimmed">$</span>tail -f {{ source }}.log
           </span>
-          <span class="flex h-6 items-center gap-2 rounded-md bg-primary/12 px-2.5 text-[11px] font-medium text-primary">
+          <span class="flex h-6 items-center gap-2 rounded-[5px] bg-primary/12 px-2.5 text-[11px] font-medium text-primary">
             <span class="live-dot size-1.5 rounded-full bg-current" />
             live
           </span>
@@ -67,7 +67,7 @@ const wall = Array.from({ length: 32 }, (_, i) =>
             class="grid min-h-9 grid-cols-[50px_1fr] items-center gap-2.5 px-4 py-1.5"
           >
             <span
-              class="justify-self-start rounded px-1.5 text-[10px] font-medium"
+              class="justify-self-start rounded-[5px] px-1.5 text-[10px] font-medium"
               :class="value ? 'bg-primary/12 text-primary' : 'bg-elevated text-muted'"
             >
               {{ value ? "INFO" : "WAIT" }}

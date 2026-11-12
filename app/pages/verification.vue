@@ -4,11 +4,11 @@
       <AuthStatusMessage v-bind="messages[linkStatus]">
         <UButton
           v-if="linkStatus === 'verified'"
-          to="/dashboard"
+          to="/onboarding"
           variant="solid"
           block
           trailing-icon="i-lucide-arrow-right"
-          label="Continue to dashboard"
+          label="Continue to onboarding"
           :class="buttonClass"
         />
 

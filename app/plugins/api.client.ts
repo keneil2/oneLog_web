@@ -1,4 +1,5 @@
 import { createAuthRepository } from "~/repositories/auth/auth";
+import { createSubcriptionReposity } from "~/repositories/subscription/subscription";
 
 export default defineNuxtPlugin((nuxtApp) => {
   const config = useRuntimeConfig();
@@ -43,5 +44,5 @@ export default defineNuxtPlugin((nuxtApp) => {
       }
     },
   });
-  return { provide: { auth: createAuthRepository(api) } };
+  return { provide: { auth: createAuthRepository(api),subscription:createSubcriptionReposity(api) } };
 });

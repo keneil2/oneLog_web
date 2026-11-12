@@ -1,6 +1,7 @@
 import type { $Fetch } from "#app";
 import type { FormSubmitEvent } from "@nuxt/ui";
 
+
 export interface User {
   email: string;
   password: string;
