@@ -40,6 +40,7 @@ type Plan = {
     }>;
   };
   price: { amount: string; currency_code: string };
+  price_id:string
 };
 
 type SubscriptionPricesResponse = {
@@ -50,9 +51,20 @@ type SubscriptionPricesResponse = {
 
 const { $subscription } = useNuxtApp();
 const plans = ref<Plan[]>([]);
-
+const emit =defineEmits();
 function selectPlan(plan: Plan) {
-  // TODO: start checkout once decided.
+emit("checkout");
+  const {$paddle}= useNuxtApp();
+  console.log(plan);
+$paddle.Checkout.open({
+items:[
+{
+priceId:plan.price_id,
+quantity:1
+}
+]
+});
+
 }
 
 onMounted(async () => {

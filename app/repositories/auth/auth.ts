@@ -1,5 +1,6 @@
 import type { $Fetch } from "#app";
 import type { FormSubmitEvent } from "@nuxt/ui";
+import { useAuthStatus } from "~/composeables/authStatus";
 
 
 export interface User {
@@ -21,13 +22,12 @@ export const createAuthRepository = (fetch: $Fetch) => {
       
     
     login: async (user: User) => {
-      const {push,currentRoute}=useRouter();
-      await setCSRFToken().then(async () => {
-       await fetch("/api/login", { method: "POST", body: user });
-         const redirect  = currentRoute.value.query.redirect;
-        
-         push(redirect as string | undefined ?? "dashboard");
-      });
+      const { push, currentRoute } = useRouter();
+      await setCSRFToken();
+      const response = await fetch<{ success: boolean }>("/api/login", { method: "POST", body: user });
+      const redirect = currentRoute.value.query.redirect;
+      push((redirect as string | undefined) ?? "dashboard");
+      return response;
     },
     logout:()=>{
     const {push}=useRouter();
@@ -37,7 +37,15 @@ export const createAuthRepository = (fetch: $Fetch) => {
       
     },
     
-    login_test:() => fetch("/api/auth-test"),
-    authVerification: (url: string) => fetch(url),
+    login_test:() => fetch("/api/auth/me"),
+    authVerification: async () => {
+      const authStatus = useAuthStatus();
+
+      const response = await fetch<{ success: boolean }>("/api/auth/me");
+      if (response.success == true) {
+        authStatus.value = true;
+      }
+    },
+    emailVerification: (url: string) => fetch(url),
   };
 };

@@ -72,6 +72,7 @@
 import * as z from "zod";
 import type { FormSubmitEvent } from "@nuxt/ui";
 import type { User } from "~/repositories/auth/auth";
+import { useAuthStatus } from "~/composeables/authStatus";
 
 const { $auth } = useNuxtApp();
 
@@ -79,7 +80,7 @@ const schema = z.object({
   email: z.email("Invalid email"),
   password: z.string("Password is required").min(8, "Must be at least 8 characters"),
 });
-
+const authStatus = useAuthStatus();
 const state = reactive<Partial<User>>({
   email: undefined,
   password: undefined,
@@ -89,6 +90,9 @@ const showPassword = ref(false);
 
 async function onSubmit(payload: FormSubmitEvent<User>) {
   const response = await $auth.login(payload.data);
+  if(response.success == true){
+   authStatus.value = true;
+  }
   console.log(response);
 }
 </script>

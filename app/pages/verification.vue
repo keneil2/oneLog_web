@@ -122,7 +122,7 @@ async function verifyEmail() {
 
   linkStatus.value = "pending";
   await $auth
-    .authVerification(url)
+    .emailVerification(url)
     .then(() => {
       linkStatus.value = "verified";
     })

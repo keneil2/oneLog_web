@@ -8,5 +8,11 @@ export default defineNuxtConfig({
    colorMode: {
      preference: 'dark',
      fallback: 'dark'
-   }
+   },
+
+  runtimeConfig:{
+public:{
+  paddleClientToken:"test_ed38d6ba2d163d99caa8a57b984",
+  paddleEnv:"sandbox",  
+}}
 })
