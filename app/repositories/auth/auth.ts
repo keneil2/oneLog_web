@@ -41,10 +41,14 @@ export const createAuthRepository = (fetch: $Fetch) => {
     authVerification: async () => {
       const authStatus = useAuthStatus();
 
-      const response = await fetch<{ success: boolean }>("/api/auth/me");
+      const response = await fetch<{ success: boolean; data: { auth_status: boolean } }>("/api/auth/me");
       if (response.success == true) {
         authStatus.value = true;
+      }else{
+        authStatus.value = false;
       }
+
+      return response;
     },
     emailVerification: (url: string) => fetch(url),
   };

@@ -50,13 +50,13 @@ type SubscriptionPricesResponse = {
 };
 
 const { $subscription } = useNuxtApp();
-const plans = ref<Plan[]>([]);
+const plans = useState<Plan[]>("subscription-plans", () => []);
 const emit =defineEmits();
 function selectPlan(plan: Plan) {
 emit("checkout");
   const {$paddle}= useNuxtApp();
   console.log(plan);
-$paddle.Checkout.open({
+$paddle?.Checkout.open({
 items:[
 {
 priceId:plan.price_id,
@@ -68,6 +68,8 @@ quantity:1
 }
 
 onMounted(async () => {
+  if (plans.value.length) return;
+
   const response = (await $subscription.getSubcriptions()) as SubscriptionPricesResponse;
   plans.value = response.data.plans;
 });
